@@ -12,6 +12,6 @@
   with_items: sysadmins
   tags: adduser
 
-- name: Make sysadmins sudoers
+- name: Make sysadmins sudoers without password prompt
   lineinfile: dest=/etc/sudoers regexp="sysadmin" line="%sysadmin ALL=(ALL) NOPASSWD:ALL"
   tags: adduser

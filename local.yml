@@ -10,4 +10,13 @@
   tasks:
     - include: tasks/users.yml
     - name: Set message of the day
-      copy: content="{{motd}}" dest=/etc/motd
+      copy:
+        content: "{{motd}}"
+        dest: /etc/motd
+
+- name: Configure database server
+  hosts: database
+  sudo: yes
+
+  roles:
+    - roles/andperez.mongodb

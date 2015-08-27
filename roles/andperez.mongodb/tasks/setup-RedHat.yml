@@ -1,0 +1,24 @@
+---
+
+- name: RedHat | Install dependencies packages
+  yum: name={{ item }} state=installed
+  with_items: mongodb_packages_dependencies
+
+- name: RedHat | Add source sources
+  template: src=mongodb.repo.j2 dest=/etc/yum.repos.d/mongodb.repo
+
+- name: RedHat | Install Packages
+  yum: name={{ item }} state=installed
+  with_items: mongodb_packages
+
+- name: MongoDB smallFiles
+  copy: src=mongodb.conf dest=/etc/
+
+- name: MongoDB smallFiles
+  copy: src=mongod.conf dest=/etc/
+
+- name: MongoDB restart
+  service: name=mongod state=restarted
+
+- name: FirewallD mongodb rule add
+  firewalld: port={{ pumukit2_mongodb_port }}/tcp permanent=true state=enabled immediate=yes
