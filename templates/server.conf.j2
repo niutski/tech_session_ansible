@@ -1,0 +1,18 @@
+## {{ ansible_managed }}
+
+server {
+    listen       80;
+    ## redirect http to https ##
+    ## rewrite     ^ https://$host$request_uri? permanent;
+
+    root                /vagrant;
+
+    access_log          /var/log/nginx/access.log;
+    error_log           /var/log/nginx/error.log;
+
+    location / {
+           proxy_pass   http://127.0.0.1:3000;
+           proxy_redirect        http://127.0.0.1:3000 http://10.0.0.2;
+    }
+    
+}

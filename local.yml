@@ -13,6 +13,7 @@
       copy:
         content: "{{motd}}"
         dest: /etc/motd
+    - include: tasks/epel.yml
 
 - name: Configure database server
   hosts: database
@@ -20,3 +21,15 @@
 
   roles:
     - roles/andperez.mongodb
+
+
+- name: Configure web server
+  hosts: webserver
+  sudo: yes
+
+  tasks:
+    - include: tasks/nginx.yml
+    - include: tasks/nodejs.yml
+
+  handlers:
+    - include: handlers/main.yml
