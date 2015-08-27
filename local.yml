@@ -1,0 +1,13 @@
+---
+- name: Configure basic system settings
+  hosts: 
+    - webserver
+    - database
+  sudo: yes
+  vars:
+    motd: "Hello tekkisessio!"
+
+  tasks:
+    - include: tasks/users.yml
+    - name: Set message of the day
+      copy: content="{{motd}}" dest=/etc/motd

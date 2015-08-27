@@ -1,0 +1,17 @@
+- name: Create sysadmin group
+  group: name=sysadmin
+  tags: adduser
+
+- name: Create sysadmin users
+  user: name={{ item.username }} state=present  groups={{ item.groups }}
+  with_items: sysadmins
+  tags: adduser
+
+- name: Add authorized keys
+  authorized_key: user={{ item.username }} key="{{ item.key }}"
+  with_items: sysadmins
+  tags: adduser
+
+- name: Make sysadmins sudoers
+  lineinfile: dest=/etc/sudoers regexp="sysadmin" line="%sysadmin ALL=(ALL) NOPASSWD:ALL"
+  tags: adduser
