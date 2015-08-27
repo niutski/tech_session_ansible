@@ -21,6 +21,11 @@ Vagrant.configure("2") do |config| # "2" denotes the API version
             end
 
             config.vm.provision "shell", inline: "yum install -y python"
+            config.vm.provision "ansible" do |ansible|
+                ansible.playbook = "ansible/local.yml"
+                ansible.sudo = true
+                ansible.inventory_path = "ansible/inventory"
+            end
         end
     end
 end
