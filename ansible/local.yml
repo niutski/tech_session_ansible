@@ -15,12 +15,12 @@
         dest: /etc/motd
     - include: tasks/epel.yml
 
-# - name: Configure database server
-#   hosts: database
-#   sudo: yes
+- name: Configure database server
+  hosts: database
+  sudo: yes
 
-#   roles:
-#     - roles/andperez.mongodb
+  roles:
+    - roles/andperez.mongodb
 
 
 - name: Configure web server
@@ -33,8 +33,8 @@
 
   tasks:
     - include: tasks/nginx.yml
-    # - name: Start litti
-    #   shell: command=cd /vagrant/litti && npm install && MONGOLAB_URI="mongodb://192.168.50.3:27017" npm start sudo=yes
+    - name: Iptables allow all
+      command: iptables -I INPUT -j ACCEPT
 
   handlers:
     - include: handlers/main.yml
