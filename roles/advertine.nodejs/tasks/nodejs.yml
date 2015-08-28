@@ -1,0 +1,16 @@
+---
+- name: Install nodejs rpm
+  yum:
+    name: >
+      {{
+      nodejs_source_url_base +
+      nodejs_source_pub +
+      nodejs_source_path_parts[ansible_userspace_architecture]
+      }}
+    state: present
+- name: Install nodejs and development tools
+  yum: name={{item}}
+  with_items:
+    - nodejs
+    - gcc-c++
+    - make

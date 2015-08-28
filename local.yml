@@ -27,9 +27,12 @@
   hosts: webserver
   sudo: yes
 
+  roles:
+  - role: roles/advertine.nodejs
+    nodejs_version: "0.12.2"
+
   tasks:
     - include: tasks/nginx.yml
-    - include: tasks/nodejs.yml
 
   handlers:
     - include: handlers/main.yml
