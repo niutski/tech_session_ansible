@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config| # "2" denotes the API version
 
     nodes = {
-        'database' => { :ip  => '192.168.111.223', :memory => 4096, :cpus => 2, :role => "database"},
-        'webserver' => { :ip  => '192.168.111.222', :memory => 4096, :cpus => 2, :role => "web", :http_forward_port => 8000 }
+        'database' => { :ip  => '192.168.111.223', :memory => 4096, :cpus => 2 },
+        'webserver' => { :ip  => '192.168.111.222', :memory => 4096, :cpus => 2, :http_forward_port => 8000 }
     }
 
     nodes.each do |node_name, node_opts|
@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config| # "2" denotes the API version
             config.vm.hostname = "#{node_name}"
             config.vm.box = "centos-7-base"
             config.vm.box_url = "https://github.com/holms/vagrant-centos7-box/releases/download/7.1.1503.001/CentOS-7.1.1503-x86_64-netboot.box"
-            config.vm.hostname = "#{node_opts[:role]}"
 
             config.vm.network :private_network, ip: node_opts[:ip]
             if !node_opts[:http_forward_port].nil?
