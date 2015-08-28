@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Rafał Michalski
+  description: Ansible role for installing nodejs from NodeSource RPMs
+  company: Advertine
+  license: MIT
+  min_ansible_version: 1.4
+  platforms:
+  - name: EL
+    versions:
+    - 6
+    - 7
+  categories:
+  - development
+  - networking
+  - packaging
+  - web
+dependencies: []
